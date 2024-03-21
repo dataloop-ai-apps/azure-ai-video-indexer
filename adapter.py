@@ -18,7 +18,7 @@ class Adapter(dl.BaseServiceRunner):
             with open('.env') as f:
                 params = json.load(f)
         else:
-            params = json.loads(base64.b64decode(secrets))
+            params = json.loads(base64.b64decode(eval(secrets)))
 
         for k, v in params.items():
             os.environ[k] = v

@@ -36,13 +36,16 @@ You need to put those parameters in an organization integration in the following
 
 ```python
 import dtlpy as dl
+import json
+import base64
 
-project = dl.projects.get()
-org: dl.Organization = project.org
+project = dl.projects.get(project_name='')
+org = dl.organizations.get(organization_id=project.org.get('id'))
 with open('.env') as f:
     params = json.load(f)
-    secrets = base64.b64encode(json.dumps(params).encode('ascii'))
+    secrets = str(base64.b64encode(str(params).encode('ascii')))
 org.integrations.create(integrations_type=dl.IntegrationType.KEY_VALUE,
-                        name='azure_vi_integration',
-                        options=secrets)
+                        name='azure-indexer-secrets',
+                        options={'key': 'azure-indexer-secrets', 'value': secrets})
+
 ```
