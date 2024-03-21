@@ -45,7 +45,7 @@ with open('.env') as f:
     params = json.load(f)
     secrets = str(base64.b64encode(str(params).encode('ascii')))
 org.integrations.create(integrations_type=dl.IntegrationType.KEY_VALUE,
-                        name='azure-indexer-secrets',
-                        options={'key': 'azure-indexer-secrets', 'value': secrets})
+                        name='azure_indexer_secrets',
+                        options={'key': 'azure_indexer_secrets', 'value': secrets})
 
 ```
