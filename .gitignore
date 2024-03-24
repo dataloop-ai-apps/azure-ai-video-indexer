@@ -331,5 +331,5 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
-
+/dataloop_scripts*
 # End of https://www.toptal.com/developers/gitignore/api/python,pycharm+all,venv,windows,macos

@@ -1,158 +1,156 @@
 {
-    "displayName": "Azure Video Indexer",
-    "name": "azure-video-indexer",
-    "scope": "public",
-    "version": "0.1.0",
-    "attributes": {
-        "Provider": "Microsoft",
-        "Category": "Pipeline",
-        "Pipeline Type": "Node",
-        "Node Type": "Models"
-    },
-    "codebase": {
-        "type": "git",
-        "gitUrl": "https://github.com/dataloop-ai-apps/azure-video-indexer.git",
-        "gitTag": "0.1.0"
-    },
-    "components": {
-        "pipelineNodes": [
-            {
-                "invoke": {
-                    "type": "function",
-                    "namespace": "azure-vi-service.azure-vi-module.run_video"
-                },
-                "name": "Index Video",
-                "categories": [
-                    "Azure-Video-Indexer"
-                ],
-                "displayName": "Index Video",
-                "description": "Run Azure VI on Video",
-                "scope": "node",
-                "configuration": {
-                    "fields": [
-                        {
-                            "name": "name",
-                            "title": "Node Name",
-                            "props": {
-                                "title": true,
-                                "type": "string",
-                                "default": "Azure Video Indexer",
-                                "required": true,
-                                "placeholder": "Insert node name"
-                            },
-                            "rules": [
-                                {
-                                    "type": "required",
-                                    "effect": "error"
-                                }
-                            ],
-                            "widget": "dl-input"
-                        }
-                    ]
-                }
-            },
-            {
-                "invoke": {
-                    "type": "function",
-                    "namespace": "azure-vi-service.azure-vi-module.run_audio"
-                },
-                "name": "Index Audio",
-                "categories": [
-                    "Azure-Video-Indexer"
-                ],
-                "displayName": "Index Audio",
-                "description": "Run Azure VI on Audio",
-                "scope": "node",
-                "configuration": {
-                    "fields": [
-                        {
-                            "name": "name",
-                            "title": "Node Name",
-                            "props": {
-                                "title": true,
-                                "type": "string",
-                                "default": "Azure Video Indexer",
-                                "required": true,
-                                "placeholder": "Insert node name"
-                            },
-                            "rules": [
-                                {
-                                    "type": "required",
-                                    "effect": "error"
-                                }
-                            ],
-                            "widget": "dl-input"
-                        }
-                    ]
-                }
-            }
+  "displayName": "Azure Video Indexer",
+  "name": "azure-video-indexer",
+  "scope": "public",
+  "version": "0.2.0",
+  "attributes": {
+    "Provider": "Microsoft",
+    "Category": "Pipeline",
+    "Pipeline Type": "Node",
+    "Node Type": "Models"
+  },
+  "codebase": {
+    "type": "git",
+    "gitUrl": "https://github.com/dataloop-ai-apps/azure-video-indexer.git",
+    "gitTag": "0.2.0"
+  },
+  "components": {
+    "pipelineNodes": [
+      {
+        "invoke": {
+          "type": "function",
+          "namespace": "azure-vi-service.azure-vi-module.run_video"
+        },
+        "name": "Index Video",
+        "categories": [
+          "Azure-Video-Indexer"
         ],
-        "modules": [
+        "displayName": "Index Video",
+        "description": "Run Azure VI on Video",
+        "scope": "node",
+        "configuration": {
+          "fields": [
             {
-                "name": "azure-vi-module",
-                "entryPoint": "adapter.py",
-                "className": "Adapter",
-                "initInputs": [
-                    {
-                        "type": "String",
-                        "name": "azure_vi_integration"
-                    }
-                ],
-                "functions": [
-                    {
-                        "name": "run_video",
-                        "input": [
-                            {
-                                "type": "Item",
-                                "name": "item"
-                            }
-                        ],
-                        "output": [
-                            {
-                                "type": "Item",
-                                "name": "item"
-                            }
-                        ],
-                        "displayIcon": "icon-dl-azure",
-                        "displayName": "Index Video"
-                    },
-                    {
-                        "name": "run_audio",
-                        "input": [
-                            {
-                                "type": "Item",
-                                "name": "item"
-                            }
-                        ],
-                        "output": [
-                            {
-                                "type": "Item",
-                                "name": "item"
-                            }
-                        ],
-                        "displayIcon": "icon-dl-azure",
-                        "displayName": "Index Audio"
-                    }
-                ]
+              "name": "name",
+              "title": "Node Name",
+              "props": {
+                "title": true,
+                "type": "string",
+                "default": "Azure Video Indexer",
+                "required": true,
+                "placeholder": "Insert node name"
+              },
+              "rules": [
+                {
+                  "type": "required",
+                  "effect": "error"
+                }
+              ],
+              "widget": "dl-input"
             }
+          ]
+        }
+      },
+      {
+        "invoke": {
+          "type": "function",
+          "namespace": "azure-vi-service.azure-vi-module.run_audio"
+        },
+        "name": "Index Audio",
+        "categories": [
+          "Azure-Video-Indexer"
         ],
-        "services": [
+        "displayName": "Index Audio",
+        "description": "Run Azure VI on Audio",
+        "scope": "node",
+        "configuration": {
+          "fields": [
             {
-                "name": "azure-vi-service",
-                "moduleName": "azure-vi-module",
-                "secrets": [
-                ],
-                "runtime": {
-                    "podType": "regular-s",
-                    "concurrency": 10,
-                    "autoscaler": {
-                        "minReplicas": 0,
-                        "maxReplicas": 2,
-                        "queueLength": 10
-                    }
-                },
-                "operation": "none"
+              "name": "name",
+              "title": "Node Name",
+              "props": {
+                "title": true,
+                "type": "string",
+                "default": "Azure Video Indexer",
+                "required": true,
+                "placeholder": "Insert node name"
+              },
+              "rules": [
+                {
+                  "type": "required",
+                  "effect": "error"
+                }
+              ],
+              "widget": "dl-input"
             }
+          ]
+        }
+      }
+    ],
+    "modules": [
+      {
+        "name": "azure-vi-module",
+        "entryPoint": "adapter.py",
+        "className": "Adapter",
+        "initInputs": [
+          {
+            "type": "String",
+            "name": "azure_vi_integration"
+          }
+        ],
+        "functions": [
+          {
+            "name": "run_video",
+            "input": [
+              {
+                "type": "Item",
+                "name": "item"
+              }
+            ],
+            "output": [
+              {
+                "type": "Item",
+                "name": "item"
+              }
+            ],
+            "displayIcon": "icon-dl-azure",
+            "displayName": "Index Video"
+          },
+          {
+            "name": "run_audio",
+            "input": [
+              {
+                "type": "Item",
+                "name": "item"
+              }
+            ],
+            "output": [
+              {
+                "type": "Item",
+                "name": "item"
+              }
+            ],
+            "displayIcon": "icon-dl-azure",
+            "displayName": "Index Audio"
+          }
         ]
-    }
+      }
+    ],
+    "services": [
+      {
+        "name": "azure-vi-service",
+        "moduleName": "azure-vi-module",
+        "runtime": {
+          "podType": "regular-s",
+          "concurrency": 10,
+          "autoscaler": {
+            "minReplicas": 0,
+            "maxReplicas": 2,
+            "queueLength": 10
+          }
+        },
+        "operation": "none"
+      }
+    ]
+  }
 }
