@@ -13,7 +13,7 @@ class VideoIndexer:
             annotation_definition = dl.Classification(label=face['name'])
             starts = list()
             ends = list()
-            for instance in face['instances']:
+            for instance in face.get('instances', list()):
                 starts.append(convert_to_seconds(instance["start"]))
                 ends.append(convert_to_seconds(instance["end"]))
             annotation = dl.Annotation.new(annotation_definition=annotation_definition,
@@ -42,7 +42,7 @@ class VideoIndexer:
             starts = list()
             ends = list()
             confidence = list()
-            for instance in label['instances']:
+            for instance in label.get('instances', list()):
                 starts.append(convert_to_seconds(instance['start']))
                 ends.append(convert_to_seconds(instance['end']))
                 confidence.append(instance['confidence'])
@@ -71,7 +71,7 @@ class VideoIndexer:
             annotation_definition = dl.Classification(label=sentiment['sentimentType'])
             starts = list()
             ends = list()
-            for instance in sentiment['instances']:
+            for instance in sentiment.get('instances', list()):
                 starts.append(convert_to_seconds(instance['start']))
                 ends.append(convert_to_seconds(instance['end']))
             annotation = dl.Annotation.new(annotation_definition=annotation_definition,
@@ -99,7 +99,7 @@ class VideoIndexer:
             starts = list()
             ends = list()
             confidence = list()
-            for instance in obj['instances']:
+            for instance in obj.get('instances', list()):
                 starts.append(convert_to_seconds(instance['start']))
                 ends.append(convert_to_seconds(instance['end']))
                 confidence.append(instance['confidence'])
@@ -123,16 +123,24 @@ class VideoIndexer:
 
     def extract(self, item, results):
         builder: dl.AnnotationCollection = item.annotations.builder()
-        for video in results['videos']:
-            faces = video['insights']['faces']
-            builder.annotations.extend(self.extract_face(faces=faces, item=item))
-            labels = video['insights']['labels']
-            builder.annotations.extend(self.extract_labels(labels=labels, item=item))
-            sentiments = video['insights']['sentiments']
-            builder.annotations.extend(self.extract_sentiments(sentiments=sentiments, item=item))
+        for video in results.get('videos', list()):
+            video_insights = video.get('insights', dict())
+
+            builder.annotations.extend(
+                self.extract_face(faces=video_insights.get('faces', list()),
+                                  item=item))
+
+            builder.annotations.extend(
+                self.extract_labels(labels=video_insights.get('labels', list()),
+                                    item=item))
+            builder.annotations.extend(
+                self.extract_sentiments(sentiments=video_insights.get('sentiments', list()),
+                                        item=item))
             # ocrs = video['insights']['ocr']
             # extract_ocr(ocrs)
-            detected_objects = video['insights']['detectedObjects']
-            builder.annotations.extend(self.extract_detected_objects(detected_objects=detected_objects, item=item))
+
+            builder.annotations.extend(
+                self.extract_detected_objects(detected_objects=video_insights.get('detectedObjects', list()),
+                                              item=item))
 
         item.annotations.upload(builder)

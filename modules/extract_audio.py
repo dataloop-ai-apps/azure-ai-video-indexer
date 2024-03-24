@@ -10,7 +10,7 @@ class AudioIndexer:
     def extract_transcripts(self, transcripts, item):
         annotations = list()
         for transcript in transcripts:
-            if len(transcript['instances']) != 1:
+            if len(transcript.get('instances', list())) != 1:
                 assert False
             annotation_definition = dl.Subtitle(text=transcript['text'],
                                                 label=f"Speaker:{transcript['speakerId']}")
@@ -33,7 +33,7 @@ class AudioIndexer:
             starts = list()
             ends = list()
             confidence = list()
-            for instance in effect['instances']:
+            for instance in effect.get('instances', list()):
                 starts.append(convert_to_seconds(instance['start']))
                 ends.append(convert_to_seconds(instance['end']))
                 confidence.append(instance['confidence'])
@@ -61,7 +61,7 @@ class AudioIndexer:
             annotation_definition = dl.Classification(label=sentiment['sentimentType'])
             starts = list()
             ends = list()
-            for instance in sentiment['instances']:
+            for instance in sentiment.get('instances', list()):
                 starts.append(convert_to_seconds(instance['start']))
                 ends.append(convert_to_seconds(instance['end']))
             annotation = dl.Annotation.new(annotation_definition=annotation_definition,
@@ -89,7 +89,7 @@ class AudioIndexer:
             starts = list()
             ends = list()
             confidence = list()
-            for instance in emotion['instances']:
+            for instance in emotion.get('instances', list()):
                 starts.append(convert_to_seconds(instance['start']))
                 ends.append(convert_to_seconds(instance['end']))
                 confidence.append(instance['confidence'])
@@ -116,16 +116,20 @@ class AudioIndexer:
         item.metadata['fps'] = 1000
 
         item.update(True)
-        for video in results['videos']:
-            transcripts = video['insights']['transcript']
-            builder.annotations.extend(self.extract_transcripts(transcripts=transcripts, item=item))
-            audio_effects = video['insights']['audioEffects']
-            builder.annotations.extend(self.extract_audio_effects(audio_effects=audio_effects, item=item))
-            sentiments = video['insights']['sentiments']
-            builder.annotations.extend(self.extract_sentiments(sentiments=sentiments, item=item))
+        for video in results.get('videos', list()):
+            video_insights = video.get('insights', dict())
+            builder.annotations.extend(
+                self.extract_transcripts(transcripts=video_insights.get('transcript', list()),
+                                         item=item))
+            builder.annotations.extend(
+                self.extract_audio_effects(audio_effects=video_insights.get('audioEffects', list()),
+                                           item=item))
+            builder.annotations.extend(
+                self.extract_sentiments(sentiments=video_insights.get('sentiments', list()),
+                                        item=item))
             # ocrs = video['insights']['ocr']
             # extract_ocr(ocrs)
-            emotions = video['insights']['emotions']
-            builder.annotations.extend(self.extract_emotions(emotions=emotions, item=item))
-
+            builder.annotations.extend(
+                self.extract_emotions(emotions=video_insights.get('emotions', list()),
+                                      item=item))
         item.annotations.upload(builder)
