@@ -71,7 +71,7 @@
               "props": {
                 "title": true,
                 "type": "string",
-                "default": "Azure Video Indexer",
+                "default": "Azure Audio Indexer",
                 "required": true,
                 "placeholder": "Insert node name"
               },
