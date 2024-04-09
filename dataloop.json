@@ -1,6 +1,6 @@
 {
-  "displayName": "Azure Video Indexer",
-  "name": "azure-video-indexer",
+  "displayName": "Azure AI Video Indexer",
+  "name": "azure-ai-video-indexer",
   "scope": "public",
   "version": "0.2.2",
   "attributes": {
