@@ -26,7 +26,7 @@
           "Azure-Video-Indexer"
         ],
         "displayName": "Index Video",
-        "description": "Run Azure VI on Video",
+        "description": "Run Azure AVI on Video",
         "scope": "node",
         "configuration": {
           "fields": [
@@ -36,7 +36,7 @@
               "props": {
                 "title": true,
                 "type": "string",
-                "default": "Azure Video Indexer",
+                "default": "Azure AI Video Indexer",
                 "required": true,
                 "placeholder": "Insert node name"
               },
@@ -61,7 +61,7 @@
           "Azure-Video-Indexer"
         ],
         "displayName": "Index Audio",
-        "description": "Run Azure VI on Audio",
+        "description": "Run Azure AVI on Audio",
         "scope": "node",
         "configuration": {
           "fields": [
@@ -71,7 +71,7 @@
               "props": {
                 "title": true,
                 "type": "string",
-                "default": "Azure Audio Indexer",
+                "default": "Azure AI Audio Indexer",
                 "required": true,
                 "placeholder": "Insert node name"
               },
