@@ -113,7 +113,7 @@
                 "name": "item"
               }
             ],
-            "displayIcon": "icon-dl-azure",
+            "displayIcon": "icon-dl-play",
             "displayName": "Index Video"
           },
           {
@@ -130,7 +130,7 @@
                 "name": "item"
               }
             ],
-            "displayIcon": "icon-dl-azure",
+            "displayIcon": "icon-dl-index-audio",
             "displayName": "Index Audio"
           }
         ]
