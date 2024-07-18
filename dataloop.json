@@ -5,9 +5,10 @@
   "version": "0.2.5",
   "attributes": {
     "Provider": "Microsoft",
-    "Category": "Pipeline",
-    "Pipeline Type": "Node",
-    "Node Type": "Models"
+    "Category": "Application",
+    "Application Type": [
+      "Pipeline Node"
+    ]
   },
   "codebase": {
     "type": "git",
