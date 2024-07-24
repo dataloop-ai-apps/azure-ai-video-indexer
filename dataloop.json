@@ -24,7 +24,7 @@
         },
         "name": "Index Video",
         "categories": [
-          "Azure-AI-Video-Indexer"
+          "azure-ai-video-indexer"
         ],
         "displayName": "Index Video",
         "description": "Run Azure AVI on Video",
@@ -59,7 +59,7 @@
         },
         "name": "Index Audio",
         "categories": [
-          "Azure-AI-Video-Indexer"
+          "azure-ai-video-indexer"
         ],
         "displayName": "Index Audio",
         "description": "Run Azure AVI on Audio",

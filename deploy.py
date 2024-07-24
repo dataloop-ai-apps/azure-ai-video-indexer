@@ -12,13 +12,13 @@ def bump(bump_type='patch'):
 
 
 def create_org_secret(project):
-    org: dl.Organization = project.org
+    org = dl.organizations.get(organization_id=project.org.get('id'))
     with open('.env') as f:
         params = json.load(f)
-        secrets = base64.b64encode(json.dumps(params).encode('ascii'))
+        secrets = str(base64.b64encode(str(params).encode('ascii')))
     org.integrations.create(integrations_type=dl.IntegrationType.KEY_VALUE,
-                            name='azure-indexer-secrets',
-                            options=secrets)
+                            name='azure_indexer_secrets',
+                            options={'key': 'azure_indexer_secrets', 'value': secrets})
 
 
 def publish_and_install(project, manifest):
