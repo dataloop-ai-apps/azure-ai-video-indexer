@@ -5,6 +5,7 @@
   "version": "0.2.6",
   "attributes": {
     "Provider": "Microsoft",
+    "Deployed By": "Microsoft",
     "Category": "Application",
     "Application Type": [
       "Pipeline Node"
