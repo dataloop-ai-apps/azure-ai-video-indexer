@@ -56,6 +56,7 @@ class Adapter(dl.BaseServiceRunner):
             json.dump(results, f, indent=2)
         extractor = VideoIndexer()
         extractor.extract(item=item, results=results)
+        return item
 
     def run_audio(self, item: dl.Item):
         if "azureIndexerVideoId" in item.system:
@@ -78,6 +79,7 @@ class Adapter(dl.BaseServiceRunner):
                 json.dump(results, f, indent=2)
         extractor = AudioIndexer()
         extractor.extract(item=item, results=results)
+        return item
 
 
 if __name__ == "__main__":
