@@ -9,6 +9,10 @@
     "Category": "Application",
     "Application Type": [
       "Pipeline Node"
+    ],
+    "Hub": [
+      "Dataloop",
+      "Microsoft"
     ]
   },
   "codebase": {
